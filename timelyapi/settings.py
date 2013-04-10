@@ -1,5 +1,6 @@
 import os
 
+
 # Django settings for timelyapi project.
 
 DEBUG = True
@@ -74,6 +75,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.environ['AUTO_CLASS_STATIC'],
 )
 
 # List of finder classes that know how to find static files in
@@ -139,8 +141,8 @@ GOOGLE_OAUTH2_CLIENT_ID      = os.environ['GOOGLE_CLIENT']  # set
 GOOGLE_OAUTH2_CLIENT_SECRET  = os.environ['GOOGLE_CLIENT_SECRET']
 
 LOGIN_URL          = '/'
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/logged-in/'
-SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/logged-in/' 
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/loggedin/'
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/loggedin/' 
 LOGIN_ERROR_URL    = '/login-error/'
 
 SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
@@ -241,6 +243,4 @@ LOGGING = {
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 #SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-from settings_local import *
 

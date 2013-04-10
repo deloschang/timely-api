@@ -7,6 +7,7 @@ from django.conf.urls import patterns, include, url
 urlpatterns = patterns('',
     # Examples:
      url(r'^$', 'webapp.views.home', name='home'),
+     url(r'^loggedin/$', 'webapp.views.loggedin', name='loggedin'),
      #url(r'^timelyapi/', include('timelyapi.foo.urls')),
      url(r'', include('social_auth.urls')),
      
