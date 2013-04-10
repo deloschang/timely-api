@@ -6,8 +6,10 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'timelyapi.views.home', name='home'),
-    # url(r'^timelyapi/', include('timelyapi.foo.urls')),
+     url(r'^$', 'webapp.views.home', name='home'),
+     #url(r'^timelyapi/', include('timelyapi.foo.urls')),
+     url(r'', include('social_auth.urls')),
+     
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
