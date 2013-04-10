@@ -19,7 +19,7 @@ DATABASES = {
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'HOST': '127.0.0.1',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '',                      # Set to empty string for default.
     }
 }
@@ -75,7 +75,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.environ['AUTO_CLASS_STATIC'],
+    '/Users/students/timely-api/static',
 )
 
 # List of finder classes that know how to find static files in
@@ -102,6 +102,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    #'django_pdb.middleware.PdbMiddleware',
+
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -115,20 +117,22 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.environ['AUTO_CLASS_TEMPLATE'],
-    
+    '/Users/student/timely-api/webapp/templates'
+
 )
 
 INSTALLED_APPS = (
     'social_auth',
     'oauth2',
     'httplib2',
+    'werkzeug_debugger_runserver',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles'
+    #'django_pdb'
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -142,7 +146,7 @@ GOOGLE_OAUTH2_CLIENT_SECRET  = os.environ['GOOGLE_CLIENT_SECRET']
 
 LOGIN_URL          = '/'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/loggedin/'
-SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/loggedin/' 
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/loggedin/'
 LOGIN_ERROR_URL    = '/login-error/'
 
 SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
@@ -205,7 +209,7 @@ TEMPLATE_CONTEXT_PROCESSORS += (
     'django.core.context_processors.request',
 )
 
-        
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

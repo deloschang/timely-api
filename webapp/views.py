@@ -5,10 +5,10 @@ from django.template import RequestContext
 from social_auth.models import UserSocialAuth
 from apiclient.discovery import build
 from oauth2client.client import AccessTokenCredentials
-# api 
+# api
 from django.http import HttpResponse
 
-import json 
+import json
 import httplib2
 
 # scraper
@@ -29,8 +29,9 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 def home(request):
-    try: 
+    try:
         link = UserSocialAuth.get_social_auth_for_user(request.user).get().tokens
+
         access_token = link['access_token']
 
         return render_to_response("loggedin.html", {'access_token': access_token}, RequestContext(request))
@@ -38,8 +39,12 @@ def home(request):
     except:
         return render_to_response("main.html", RequestContext(request))
 
+
+
+
+
 def loggedin(request):
-    try: 
+    try:
         link = UserSocialAuth.get_social_auth_for_user(request.user).get().tokens
 
         access_token = link['access_token']
@@ -53,7 +58,7 @@ def loggedin(request):
 
         # Snippet that lists all calendar events
         #request = service.events().list(calendarId='primary')
-        
+
         #while request != None:
           ## Get the next page.
           #response = request.execute()
@@ -86,9 +91,9 @@ def loggedin(request):
         #print "Created Event: %s" % created_event['id']
         return render_to_response("loggedin.html", RequestContext(request))
 
-    except: 
+    except:
         return render_to_response("main.html", RequestContext(request))
-    
+
 
 # begin the api
 # url: /api/v1/locations
@@ -111,7 +116,7 @@ def locations(request):
 
         return HttpResponse(json.dumps(payload), mimetype="application/json")
 
-        
+
 
 
     else:
