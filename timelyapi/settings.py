@@ -7,8 +7,14 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    # ('Aaditya Talwai', 'aaditya.21@gmail.com'),
 )
+
+
+
+GOOGLE_CLIENT="876852773074-2o3184hkpdchil2q6m899s4aatguna39.apps.googleusercontent.com"
+GOOGLE_CLIENT_SECRET="zwe7TX17stsEOnB7FeAqQN7E"
+
 
 MANAGERS = ADMINS
 
@@ -141,8 +147,8 @@ INSTALLED_APPS = (
 
 # social_auth dependencies
 GOOGLE_OAUTH_EXTRA_SCOPE = ['https://www.googleapis.com/auth/calendar']
-GOOGLE_OAUTH2_CLIENT_ID      = "426556866537.apps.googleusercontent.com"  # set
-GOOGLE_OAUTH2_CLIENT_SECRET  = "zwe7TX17stsEOnB7FeAqQN7E"
+GOOGLE_OAUTH2_CLIENT_ID      = GOOGLE_CLIENT  # set
+GOOGLE_OAUTH2_CLIENT_SECRET  = GOOGLE_CLIENT_SECRET
 
 LOGIN_URL          = '/'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/loggedin/'
