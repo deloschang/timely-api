@@ -26,8 +26,6 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 
-
-
 def home(request):
     try: 
         link = UserSocialAuth.get_social_auth_for_user(request.user).get().tokens
@@ -35,7 +33,7 @@ def home(request):
 
         return render_to_response("loggedin.html", {'access_token': access_token}, RequestContext(request))
 
-    except:
+    except AttributeError:
         return render_to_response("main.html", RequestContext(request))
 
 def loggedin(request):
@@ -102,20 +100,29 @@ def locations(request):
         latitude = strip_tags(request.POST['latitude'])
         longitude = strip_tags(request.POST['longitude'])
 
-        # insert geocoder here
+        # insert reverse-geocoder here
+        # CODE here
 
+        # load into database
+        # CODE here
+
+        # if location changes by X factor, write to calendar
+        # CODE here
 
         # return JSON response
         #{"address":"Observatory Road, Dartmouth College, Hanover, NH 03755, USA","created_at":"2013-02-13T00:30:08Z","id":1,"latitude":"43.70359","longitude":"-72.286756","updated_at":"2013-02-13T00:30:08Z"}
         payload = {'latitude':latitude, 'longitude':longitude}
-
-        return HttpResponse(json.dumps(payload), mimetype="application/json")
-
         
+        return HttpResponse(json.dumps(payload), mimetype="application/json")
 
 
     else:
-        # not POST, send home
+        # not POST, send error or replace with 404 later
         return render_to_response("main.html", RequestContext(request))
 
 
+# begin separate api for testing geofences
+def geofences(request):
+    if request.method=='POST':
+        # return the location from the database
+        return HttpResponse('success')
