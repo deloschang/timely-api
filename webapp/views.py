@@ -30,11 +30,11 @@ from django.views.decorators.csrf import csrf_exempt
 
 def home(request):
 
-    System.out.println ("ASDASFSAFASFASFASFAF");
+    print ("ASDASFSAFASFASFASFAF")
     try:
         link = UserSocialAuth.get_social_auth_for_user(request.user).get().tokens
 
-        System.out.println("got link");
+        print("got link")
 
         access_token = link['access_token']
 

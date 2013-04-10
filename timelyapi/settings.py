@@ -27,7 +27,7 @@ DATABASES = {
         'USER': '',
         'PASSWORD': '',
         'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': os.environ['PORT'],                      # Set to empty string for default.
+        'PORT': '',                      # Set to empty string for default.
     }
 }
 
@@ -130,6 +130,7 @@ TEMPLATE_DIRS = (
 
 INSTALLED_APPS = (
     'social_auth',
+    'gunicorn',
     'oauth2',
     'httplib2',
     'werkzeug_debugger_runserver',
@@ -249,9 +250,11 @@ LOGGING = {
 
 # heroku
 # Parse database configuration from $DATABASE_URL
-import dj_database_url
-DATABASES['default']=dj_database_url.config()
 
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+if 'DATABASE_URL' in os.environ:
+    import dj_database_url
+    DATABASES['default']=dj_database_url.config()
+
+    # Honor the 'X-Forwarded-Proto' header for request.is_secure()
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
