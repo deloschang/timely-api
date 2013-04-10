@@ -92,6 +92,14 @@ def locations(request):
         latitude = strip_tags(request.POST['latitude'])
         longitude = strip_tags(request.POST['longitude'])
 
+        payload = {'latitude':latitude, 'longitude':longitude}
+        returnjson = json.dumps(payload)
+
+
+        return returnjson
+
+        
+
 
     else:
         # not POST, send home
