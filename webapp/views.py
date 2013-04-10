@@ -98,10 +98,18 @@ def locations(request):
         import pdb;
         pdb.set_trace()
 
-        # sanitize and localize
+        # need to reference account first
+        # CODE HERE
+
+        # sanitize and localize the JSON
         latitude = strip_tags(request.POST['latitude'])
         longitude = strip_tags(request.POST['longitude'])
 
+        # insert geocoder here
+
+
+        # return JSON response
+        #{"address":"Observatory Road, Dartmouth College, Hanover, NH 03755, USA","created_at":"2013-02-13T00:30:08Z","id":1,"latitude":"43.70359","longitude":"-72.286756","updated_at":"2013-02-13T00:30:08Z"}
         payload = {'latitude':latitude, 'longitude':longitude}
 
         return HttpResponse(json.dumps(payload), mimetype="application/json")
