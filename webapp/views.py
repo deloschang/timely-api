@@ -27,8 +27,6 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 def home(request):
-
-    print ("ASDASFSAFASFASFASFAF")
     try:
         link = UserSocialAuth.get_social_auth_for_user(request.user).get().tokens
 
