@@ -7,10 +7,17 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    # ('Aaditya Talwai', 'aaditya.21@gmail.com'),
 )
 
+
+
+GOOGLE_CLIENT="426556866537-pt21g3g6723voi39s9bea71q74ju39rm.apps.googleusercontent.com"
+GOOGLE_CLIENT_SECRET="l5FM0e7RSz7IK8iVwhpqm3RS"
+
+
 MANAGERS = ADMINS
+
 
 DATABASES = {
     'default': {
@@ -75,7 +82,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.environ['AUTO_CLASS_STATIC'],
+    '/static',
 )
 
 # List of finder classes that know how to find static files in
@@ -102,6 +109,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    #'django_pdb.middleware.PdbMiddleware',
+
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -115,20 +124,23 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.environ['AUTO_CLASS_TEMPLATE'],
-    
+    'webapp/templates'
+
 )
 
 INSTALLED_APPS = (
     'social_auth',
+    'gunicorn',
     'oauth2',
     'httplib2',
+    'werkzeug_debugger_runserver',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles'
+    #'django_pdb'
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -137,12 +149,12 @@ INSTALLED_APPS = (
 
 # social_auth dependencies
 GOOGLE_OAUTH_EXTRA_SCOPE = ['https://www.googleapis.com/auth/calendar']
-GOOGLE_OAUTH2_CLIENT_ID      = os.environ['GOOGLE_CLIENT']  # set
-GOOGLE_OAUTH2_CLIENT_SECRET  = os.environ['GOOGLE_CLIENT_SECRET']
+GOOGLE_OAUTH2_CLIENT_ID      = GOOGLE_CLIENT  # set
+GOOGLE_OAUTH2_CLIENT_SECRET  = GOOGLE_CLIENT_SECRET
 
 LOGIN_URL          = '/'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/loggedin/'
-SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/loggedin/' 
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/loggedin/'
 LOGIN_ERROR_URL    = '/login-error/'
 
 SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
@@ -205,7 +217,7 @@ TEMPLATE_CONTEXT_PROCESSORS += (
     'django.core.context_processors.request',
 )
 
-        
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -238,9 +250,11 @@ LOGGING = {
 
 # heroku
 # Parse database configuration from $DATABASE_URL
-#import dj_database_url
-#DATABASES['default'] =  dj_database_url.config()
 
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
-#SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+if 'DATABASE_URL' in os.environ:
+    import dj_database_url
+    DATABASES['default']=dj_database_url.config()
+
+    # Honor the 'X-Forwarded-Proto' header for request.is_secure()
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
