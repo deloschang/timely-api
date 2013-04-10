@@ -84,3 +84,17 @@ def loggedin(request):
         return render_to_response("main.html", RequestContext(request))
     
 
+# begin the api
+# url: /api/v1/locations
+def locations(request):
+    if request.method == 'POST':
+        # sanitize and localize
+        latitude = strip_tags(request.POST['latitude'])
+        longitude = strip_tags(request.POST['longitude'])
+
+
+    else:
+        # not POST, send home
+        return render_to_response("main.html", RequestContext(request))
+
+

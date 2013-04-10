@@ -10,6 +10,7 @@ urlpatterns = patterns('',
      url(r'^loggedin/$', 'webapp.views.loggedin', name='loggedin'),
      #url(r'^timelyapi/', include('timelyapi.foo.urls')),
      url(r'', include('social_auth.urls')),
+     url(r'api/v1/locations', 'webapp.views.locations', name='locations'),
      
 
     # Uncomment the admin/doc line below to enable admin documentation:
