@@ -75,7 +75,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/Users/students/timely-api/static',
+    '/static',
 )
 
 # List of finder classes that know how to find static files in
@@ -117,7 +117,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/Users/student/timely-api/webapp/templates'
+    'webapp/templates'
 
 )
 
@@ -141,8 +141,8 @@ INSTALLED_APPS = (
 
 # social_auth dependencies
 GOOGLE_OAUTH_EXTRA_SCOPE = ['https://www.googleapis.com/auth/calendar']
-GOOGLE_OAUTH2_CLIENT_ID      = os.environ['GOOGLE_CLIENT']  # set
-GOOGLE_OAUTH2_CLIENT_SECRET  = os.environ['GOOGLE_CLIENT_SECRET']
+GOOGLE_OAUTH2_CLIENT_ID      = "426556866537.apps.googleusercontent.com"  # set
+GOOGLE_OAUTH2_CLIENT_SECRET  = "zwe7TX17stsEOnB7FeAqQN7E"
 
 LOGIN_URL          = '/'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/loggedin/'
