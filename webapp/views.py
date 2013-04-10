@@ -95,9 +95,6 @@ def loggedin(request):
 @csrf_exempt
 def locations(request):
     if request.method == 'POST':
-        import pdb;
-        pdb.set_trace()
-
         # need to reference account first
         # CODE HERE
 
