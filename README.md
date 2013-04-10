@@ -1,4 +1,4 @@
-<
+
 Introduction
 ------------
 
@@ -27,4 +27,9 @@ deployment](https://ariejan.net/2011/09/14/lighting-fast-zero-downtime-deploymen
 timely-web
 ==========
 
-TimelyApi w/ Heroku deployment
+TimelyApi w/ Heroku deployment. App is live [here] (http://pure-retreat-6606.herokuapp.com/)
+
+Deploy using
+```sh
+git push heroku master
+```
