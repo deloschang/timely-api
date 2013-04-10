@@ -10,7 +10,7 @@ POST `latitude` and `longitude` to
 `http://localhost:8000/api/v1/locations`.
 
 ```sh
-λ virtualbox timely → λ git master → curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"latitude":"43.70359","longitude":"-72.286756"}' http://mytimely.com/locations.json
+λ virtualbox timely → λ git master → curl -d 'latitude=43.70359&longitude=-72.286756' http://localhost:8000/api/v1/locations
 {"address":"Observatory Road, Dartmouth College, Hanover, NH 03755, USA","created_at":"2013-02-13T00:30:08Z","id":1,"latitude":"43.70359","longitude":"-72.286756","updated_at":"2013-02-13T00:30:08Z"}
 ```
 

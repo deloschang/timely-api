@@ -5,6 +5,8 @@ from django.template import RequestContext
 from social_auth.models import UserSocialAuth
 from apiclient.discovery import build
 from oauth2client.client import AccessTokenCredentials
+# api 
+from django.http import HttpResponse
 
 import json 
 import httplib2
@@ -20,6 +22,10 @@ from django.utils.html import strip_tags # sanitize
 # extra
 import datetime
 from datetime import timedelta
+from django.views.decorators.csrf import csrf_exempt
+
+
+
 
 
 def home(request):
@@ -86,17 +92,19 @@ def loggedin(request):
 
 # begin the api
 # url: /api/v1/locations
+@csrf_exempt
 def locations(request):
     if request.method == 'POST':
+        import pdb;
+        pdb.set_trace()
+
         # sanitize and localize
         latitude = strip_tags(request.POST['latitude'])
         longitude = strip_tags(request.POST['longitude'])
 
         payload = {'latitude':latitude, 'longitude':longitude}
-        returnjson = json.dumps(payload)
 
-
-        return returnjson
+        return HttpResponse(json.dumps(payload), mimetype="application/json")
 
         
 
