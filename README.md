@@ -20,6 +20,9 @@ Setup
 In timelyapi/settings.py, setup variables for Templates, Static, Google
 Client, Google Secret
 
+You can set up a .sh script that sources these variables for you
+Example: source setup.sh
+
 Deploy
 ------
 

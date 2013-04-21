@@ -89,7 +89,7 @@ def loggedin(request):
         #created_event = service.events().insert(calendarId='primary', body=event).execute()
 
         #print "Created Event: %s" % created_event['id']
-        return render_to_response("loggedin.html", RequestContext(request))
+        return render_to_response("loggedin.html", {'access_token': access_token}, RequestContext(request))
 
     except:
         return render_to_response("main.html", RequestContext(request))
@@ -128,7 +128,6 @@ def locations(request):
         return render_to_response("main.html", RequestContext(request))
 
 
-# begin separate api for testing geofences
 def geofences(request):
     if request.method=='POST':
         # return the location from the database
