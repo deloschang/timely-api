@@ -79,11 +79,11 @@ def loggedin(request):
 
         # working event
         event = {
-          'summary': "summary",
-          'description': "description",
-          'start' : { 'dateTime' : "2013-04-01T15:00:00.000Z"},
-          'end' : { 'dateTime' : "2013-04-01T17:00:00.000Z"}
-        }
+                'summary': "summary",
+                'description': "description",
+                'start' : { 'dateTime' : "2013-04-01T15:00:00.000Z"},
+                'end' : { 'dateTime' : "2013-04-01T17:00:00.000Z"}
+                }
 
 
         #created_event = service.events().insert(calendarId='primary', body=event).execute()
@@ -95,7 +95,6 @@ def loggedin(request):
         return render_to_response("main.html", RequestContext(request))
 
 
-# begin the api
 # url: /api/v1/locations
 @csrf_exempt
 def locations(request):
@@ -120,6 +119,60 @@ def locations(request):
         #{"address":"Observatory Road, Dartmouth College, Hanover, NH 03755, USA","created_at":"2013-02-13T00:30:08Z","id":1,"latitude":"43.70359","longitude":"-72.286756","updated_at":"2013-02-13T00:30:08Z"}
         payload = {'latitude':latitude, 'longitude':longitude}
 
+        return HttpResponse(json.dumps(payload), mimetype="application/json")
+
+
+    else:
+        # not POST, send error or replace with 404 later
+        return render_to_response("main.html", RequestContext(request))
+
+# url: /api/v1/movies
+# Scrape the Hop and list the movies 
+@csrf_exempt
+def movies(request):
+    if request.method == 'GET':
+        # create the url
+
+        parameters = {}
+        data = json.dumps(parameters)
+        url = 'https://hop.dartmouth.edu/Online/film'
+        headers = {"Content-Type": "application/json",
+            'Content-Length' : len(data),
+            "Referer":"http://nutrition.dartmouth.edu:8088/",
+            #"Cookie":'JSESSIONID=2C6BBA00328C1C2F67794E50337D6E3A.N1TS002',
+            "User-Agent":'Mozilla/5.0 (X11; Linux x86_64; rv:10.0.1) Gecko/20100101 Firefox/10.0.1',
+            "method":"get_nutrient_label_items",
+            "params": "",
+            "id":25 # why static?
+            }
+
+        req = urllib2.Request(url, data, headers)
+        response = urllib2.urlopen(req)
+
+        read =  response.read()
+        print read
+
+
+
+        # sanitize and localize the JSON
+        #latitude = strip_tags(request.POST['latitude'])
+        #longitude = strip_tags(request.POST['longitude'])
+
+        # insert reverse-geocoder here
+        # CODE here
+
+        # load into database
+        # CODE here
+
+        # if location changes by X factor, write to calendar
+        # CODE here
+
+        # return JSON response
+        #{"address":"Observatory Road, Dartmouth College, Hanover, NH 03755, USA","created_at":"2013-02-13T00:30:08Z","id":1,"latitude":"43.70359","longitude":"-72.286756","updated_at":"2013-02-13T00:30:08Z"}
+        #payload = {'latitude':latitude, 'longitude':longitude}
+        payload = parameters
+
+        #return HttpResponse(json.dumps(payload), mimetype="application/json")
         return HttpResponse(json.dumps(payload), mimetype="application/json")
 
 

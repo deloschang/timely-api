@@ -13,6 +13,8 @@ urlpatterns = patterns('',
 
      # current API url
      url(r'api/v1/locations', 'webapp.views.locations', name='locations'),
+
+     url(r'api/v1/movies', 'webapp.views.movies', name='movies'),
      
 
     # Uncomment the admin/doc line below to enable admin documentation:
