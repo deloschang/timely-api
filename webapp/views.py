@@ -189,12 +189,13 @@ def movies(request):
                             movie_place =  place[16].replace('"','')  # place
                             print movie_place
 
+                            paylist={}
+                            paylist={'name': movie_name, 'time': time, 'place':movie_place}
+                            payload.append(paylist)
+
                     except:
                         break
 
-                    paylist={}
-                    paylist={'name': movie_name, 'time': time, 'place':movie_place}
-                    payload.append(paylist)
 
                     print "==="
 
