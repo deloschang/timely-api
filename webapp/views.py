@@ -134,8 +134,12 @@ def movies(request):
         # create the url
 
         parameters = {}
+
+        
+        payload = []# result to be generated
+
         data = json.dumps(parameters)
-        url = 'https://hop.dartmouth.edu/Online/film'
+        url = 'http://hop.dartmouth.edu/Online/film'
         headers = {"Content-Type": "application/json",
             'Content-Length' : len(data),
             "Referer":"http://nutrition.dartmouth.edu:8088/",
@@ -150,7 +154,56 @@ def movies(request):
         response = urllib2.urlopen(req)
 
         read =  response.read()
-        print read
+
+        parser = read.split('searchResults : [')[1];
+        parser2 = parser.split('searchFilters : [')[0];
+
+        #print parser2
+        parser3 = parser2.split('],')
+
+        for i in range(0, len(parser3) - 1):
+            parser3[i] = parser3[i].strip()
+
+            movie = parser3[i]
+
+            if 'HOP FILM' in movie:
+                result = movie.split('HOP FILM')
+                #print result[1]  # movie name
+
+                if ',' in result[1] and result[1].strip() != "":
+                    check = result[1].split(',')[1]
+
+                    if check.strip() != "":
+                        time = result[1].split(',')[1].replace('"','')
+                        print time.replace('"','')  # time 
+                    else:
+                        break
+
+
+                    place = result[1].split(',')
+
+                    try:
+                        if place[16].strip() != '"' and place[15] != "Hop / DFS and Pick 6 films":
+                            movie_name = place[15].replace('"','').replace('\\','')  # movie name
+                            print movie_name
+                            movie_place =  place[16].replace('"','')  # place
+                            print movie_place
+
+                    except:
+                        break
+
+                    paylist={}
+                    paylist={'name': movie_name, 'time': time, 'place':movie_place}
+                    payload.append(paylist)
+
+                    print "==="
+
+                else:
+                    break
+
+
+
+
 
 
 
@@ -170,7 +223,7 @@ def movies(request):
         # return JSON response
         #{"address":"Observatory Road, Dartmouth College, Hanover, NH 03755, USA","created_at":"2013-02-13T00:30:08Z","id":1,"latitude":"43.70359","longitude":"-72.286756","updated_at":"2013-02-13T00:30:08Z"}
         #payload = {'latitude':latitude, 'longitude':longitude}
-        payload = parameters
+        #payload = parameters
 
         #return HttpResponse(json.dumps(payload), mimetype="application/json")
         return HttpResponse(json.dumps(payload), mimetype="application/json")
