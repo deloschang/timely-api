@@ -1,4 +1,4 @@
-Django==1.5.1
+Django==1.11.29
 Werkzeug==0.8.3
 apiclient==1.0.2
 distribute==0.6.36
