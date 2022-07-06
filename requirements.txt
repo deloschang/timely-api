@@ -8,7 +8,7 @@ django-pdb==0.3.2
 django-werkzeug-debugger-runserver==0.1.2
 google-api-python-client==1.1
 gunicorn==0.17.2
-html5lib==0.95
+html5lib==0.999999999
 httplib2==0.8
 oauth2==1.5.211
 psycopg2==2.5
